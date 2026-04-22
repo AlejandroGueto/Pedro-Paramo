@@ -1,30 +1,70 @@
-import React, { useState } from 'react';
-
-const normalizeString = (str) => {
-  return str
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .trim();
-};
-
-const fragments = [
-  {
-    title: "Habitación 1: El Creador y la Magia",
-    context: `Antes de adentrarte en Comala, debes conocer a su creador y las leyes que rigen este universo. 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape de Comala - Pedro Páramo</title>
     
-    JUAN RULFO (1917-1986) fue un escritor mexicano que, con solo dos obras ("El Llano en llamas", 1953, y "Pedro Páramo"), revolucionó la literatura universal. Su obra retrata el campo mexicano, la soledad, la fatalidad y la muerte, marcados por la Revolución y la Guerra Cristera.
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    EL REALISMO MÁGICO Y LO REAL MARAVILLOSO: "Pedro Páramo" es precursora del boom latinoamericano. En esta novela, la frontera entre la vida y la muerte desaparece. Los vivos conversan con los muertos con total naturalidad, el tiempo no es lineal (da saltos entre el pasado del cacique Pedro Páramo y el presente de su hijo Juan Preciado), y el espacio (Comala) pasa de ser un paraíso terrenal a un infierno árido habitado solo por murmullos y ánimas en pena.`,
-    question: "Para abrir las puertas de Comala, introduce el AÑO en el que se publicó por primera vez la novela maestra de Rulfo, 'Pedro Páramo'.",
-    answers: ["1955"],
-    placeholder: "Ej: 1980",
-    successText: "¡Exacto! 1955 marca un antes y un después en la literatura hispanoamericana. Ahora, cruza el umbral de Comala. Escucha con atención..."
-  },
-  {
-    title: "Habitación 2: Los ecos del remordimiento",
-    context: `Juan Preciado llega a Comala buscando a su padre, Pedro Páramo. Allí le recibe doña Eduviges Dyada... Lee el siguiente fragmento para encontrar la clave.`,
-    fragment: `—¿Qué es lo que pasa, doña Eduviges?
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    
+    <!-- Babel para compilar JSX en el navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #1c1917; 
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #44403c; 
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #57534e; 
+        }
+    </style>
+</head>
+<body class="bg-stone-950 text-stone-300">
+    
+    <!-- Contenedor principal de la aplicación -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        const normalizeString = (str) => {
+          return str
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .trim();
+        };
+
+        const fragments = [
+          {
+            title: "Habitación 1: El Creador y la Magia",
+            context: `Antes de adentrarte en Comala, debes conocer a su creador y las leyes que rigen este universo. 
+            
+            JUAN RULFO (1917-1986) fue un escritor mexicano que, con solo dos obras ("El Llano en llamas", 1953, y "Pedro Páramo"), revolucionó la literatura universal. Su obra retrata el campo mexicano, la soledad, la fatalidad y la muerte, marcados por la Revolución y la Guerra Cristera.
+            
+            EL REALISMO MÁGICO Y LO REAL MARAVILLOSO: "Pedro Páramo" es precursora del boom latinoamericano. En esta novela, la frontera entre la vida y la muerte desaparece. Los vivos conversan con los muertos con total naturalidad, el tiempo no es lineal (da saltos entre el pasado del cacique Pedro Páramo y el presente de su hijo Juan Preciado), y el espacio (Comala) pasa de ser un paraíso terrenal a un infierno árido habitado solo por murmullos y ánimas en pena.`,
+            question: "Para abrir las puertas de Comala, introduce el AÑO en el que se publicó por primera vez la novela maestra de Rulfo, 'Pedro Páramo'.",
+            answers: ["1955"],
+            placeholder: "Ej: 1980",
+            successText: "¡Exacto! 1955 marca un antes y un después en la literatura hispanoamericana. Ahora, cruza el umbral de Comala. Escucha con atención..."
+          },
+          {
+            title: "Habitación 2: Los ecos del remordimiento",
+            context: `Juan Preciado llega a Comala buscando a su padre, Pedro Páramo. Allí le recibe doña Eduviges Dyada... Lee el siguiente fragmento para encontrar la clave.`,
+            fragment: `—¿Qué es lo que pasa, doña Eduviges?
 Ella sacudió la cabeza como si despertara de un sueño.
 —Es el caballo de Miguel Páramo, que galopa por el camino de la Media Luna.
 —¿Entonces vive alguien en la Media Luna?
@@ -51,15 +91,15 @@ Guardó silencio un rato y luego añadió:
 "—No hace ni media hora. De ser antes, tal vez se hubiera salvado. Aunque, según el doctor que lo palpó, ya estaba frío desde tiempo atrás. Lo supimos porque el Colorado volvió solo y se puso tan inquieto que no dejó dormir a nadie. Usted sabe cómo se querían él y el caballo, y hasta estoy por creer que el animal sufre más que don Pedro. No ha comido ni dormido y nomás se vuelve un puro corretear. Como que sabe, ¿sabe usted?Como que se siente despedazado y carcomido por dentro.
 "— No se te olvide cerrar la puerta cuando te vayas.
 "Y el mozo de la Media Luna se fue."`,
-    question: "¿Qué criatura sigue galopando eternamente por la Media Luna, atormentada por el remordimiento, demostrando que en Comala el pasado y el presente conviven?",
-    answers: ["caballo", "el caballo", "colorado", "el colorado"],
-    placeholder: "Escribe la respuesta...",
-    successText: "Clave correcta. CLAVE LITERARIA: Fíjate cómo Rulfo introduce lo sobrenatural (hablar con un muerto, escuchar un animal fantasma) como algo cotidiano. Es la esencia del Realismo Mágico."
-  },
-  {
-    title: "Habitación 3: El precio del perdón",
-    context: `Miguel Páramo, hijo del cacique, era un ser cruel. Ha muerto. Observa cómo reacciona la Iglesia, representada por el padre Rentería, frente al poder de Pedro Páramo.`,
-    fragment: `"Hay aire y sol, hay nubes. Allá arriba un cielo azul detrás de él tal vez haya canciones; tal vez mejores voces . . . Hay esperanza, en suma. Hay esperanza para nosotros, contra nuestro pesar.
+            question: "¿Qué criatura sigue galopando eternamente por la Media Luna, atormentada por el remordimiento, demostrando que en Comala el pasado y el presente conviven?",
+            answers: ["caballo", "el caballo", "colorado", "el colorado"],
+            placeholder: "Escribe la respuesta...",
+            successText: "Clave correcta. CLAVE LITERARIA: Fíjate cómo Rulfo introduce lo sobrenatural (hablar con un muerto, escuchar un animal fantasma) como algo cotidiano. Es la esencia del Realismo Mágico."
+          },
+          {
+            title: "Habitación 3: El precio del perdón",
+            context: `Miguel Páramo, hijo del cacique, era un ser cruel. Ha muerto. Observa cómo reacciona la Iglesia, representada por el padre Rentería, frente al poder de Pedro Páramo.`,
+            fragment: `"Hay aire y sol, hay nubes. Allá arriba un cielo azul detrás de él tal vez haya canciones; tal vez mejores voces . . . Hay esperanza, en suma. Hay esperanza para nosotros, contra nuestro pesar.
 "Pero no para ti, Miguel Páramo, que has muerto sin perdón y no alcanzarás ninguna gracia."
 El padre Rentería dio vuelta al cuerpo y entregó la misa al pasado. Se dio prisa por terminar pronto y salió sin dar la bendición final a aquella gente que llenaba la iglesia.
 —¡Padre, queremos que nos lo bendiga!
@@ -78,15 +118,15 @@ La iglesia estaba ya vacía. Dos hombres esperaban en la puerta a Pedro Páramo,
 Y cerró el sagrario.
 Entró en la sacristía, se echó en un rincón, y allí lloró de pena y de tristeza hasta agotar sus lágrimas.
 —Está bien, Señor, tú ganas -dijo después.`,
-    question: "El padre Rentería sabe que Miguel es un asesino y violador pero cede ante el cacique. ¿Qué objeto exacto utiliza Pedro Páramo para 'comprar' esa salvación en el reclinatorio?",
-    answers: ["monedas", "monedas de oro", "oro", "un puño de monedas de oro", "unas monedas"],
-    placeholder: "Escribe la respuesta...",
-    successText: "Clave correcta. CLAVE LITERARIA: Rulfo realiza aquí una dura crítica social al caciquismo y a la corrupción moral de la Iglesia, que se rinde ante el poder del dinero traicionando sus propios principios."
-  },
-  {
-    title: "Habitación 4: El pueblo del pecado",
-    context: `Juan Preciado continúa vagando y encuentra a una pareja viviendo en el más absoluto aislamiento y pecado. Comala no es un pueblo terrenal, es otra cosa.`,
-    fragment: `—¿A dónde fue su marido?
+            question: "El padre Rentería sabe que Miguel es un asesino y violador pero cede ante el cacique. ¿Qué objeto exacto utiliza Pedro Páramo para 'comprar' esa salvación en el reclinatorio?",
+            answers: ["monedas", "monedas de oro", "oro", "un puño de monedas de oro", "unas monedas"],
+            placeholder: "Escribe la respuesta...",
+            successText: "Clave correcta. CLAVE LITERARIA: Rulfo realiza aquí una dura crítica social al caciquismo y a la corrupción moral de la Iglesia, que se rinde ante el poder del dinero traicionando sus propios principios."
+          },
+          {
+            title: "Habitación 4: El pueblo del pecado",
+            context: `Juan Preciado continúa vagando y encuentra a una pareja viviendo en el más absoluto aislamiento y pecado. Comala no es un pueblo terrenal, es otra cosa.`,
+            fragment: `—¿A dónde fue su marido?
 —No es mi marido. Es mi hermano; aunque él no quiere que se sepa. ¿ Que adónde fue? De seguro a buscar un becerro cimarrón que anda por ahi desbalagado. Al menos eso me dijo.
 —¿Cuánto hace que están ustedes aquí?
 —Desde siempre. Aquí nacimos.
@@ -105,29 +145,29 @@ Era una cara común y corriente.
 "—Sepárense. Eso es todo lo que se puede hacer.
 "—Pero ¿cómo viviremos?
 "—Como viven los hombres."`,
-    question: "La mujer explica que es inútil rezar por las almas perdidas porque no alcanzan los Padrenuestros para todas. Según ella, ¿qué 'gentío' anda suelto por las calles de Comala en cuanto oscurece?",
-    answers: ["animas", "las animas", "espantos", "los espantos"],
-    placeholder: "Escribe la respuesta...",
-    successText: "Clave correcta. CLAVE LITERARIA: Comala es en realidad una representación del Purgatorio. Un lugar sin redención posible donde el fatalismo (el destino trágico del que no se puede escapar) domina la existencia."
-  },
-  {
-    title: "Habitación 5: La ilusión enterrada",
-    context: `Juan Preciado ha muerto de miedo al escuchar los murmullos de Comala. Ahora se encuentra en su tumba, compartiendo ataúd con otra alma, Dorotea, la mendiga.`,
-    fragment: `—¿La ilusión? Eso cuesta caro. A mí me costó vivir más de lo debido. Pagué con eso la deuda de encontrar a mi hijo, que no fue, por decirlo así, sino una ilusión más; porque nunca tuve ningún hijo. Ahora que estoy muerta me he dado tiempo para pensar y enterarme de todo. Ni siquiera el nido para guardarlo me dio Dios. Sólo esa vida arrastrada que tuve, llevando de aquí para allá mis ojos tristes que siempre mirando de reojo como buscando detrás de la gente, sospechando que alguien me hubiera escondido a mi niño. Y todo fue culpa de un maldito sueño. He tenido dos: a uno de ellos lo llamo el "bendito" y al otro el "maldito". El primero fue el que me hizo soñar que había tenido un hijo. Y mientras viví, nunca dejé de creer que fuera cierto; porque lo sentí entre mis brazos, tiernito, lleno de boca y de ojos y de manos; durante mucho tiempo conservé en mis dedos la impresión de sus ojos dormidos y el palpitar de su corazón. ¿Cómo no iba a pensar que aquello fuera verdad? Lo llevaba conmigo a dondequiera que iba, envuelto en mi rebozo, y de pronto lo perdí. En el cielo me dijeron que se habían equivocado conmigo. Que me habían dado un corazón de madre, pero un seno de una cualquiera. Ése fue el otro sueño que tuve. Llegué al cielo y me asomé a ver si entre los ángeles reconocía la cara de mi hijo. Y nada. Todas las caras eran iguales, hechas con el mismo molde. Entonces pregunté. Uno de aquellos santos se me acercó y, sin decirme nada, hundió una de sus manos en mi estómago como si la hubiera hundido en un montón de cera. Al sacarla me enseñó algo así como una cáscara de nuez: "Esto prueba lo que te demuestra".
+            question: "La mujer explica que es inútil rezar por las almas perdidas porque no alcanzan los Padrenuestros para todas. Según ella, ¿qué 'gentío' anda suelto por las calles de Comala en cuanto oscurece?",
+            answers: ["animas", "las animas", "espantos", "los espantos"],
+            placeholder: "Escribe la respuesta...",
+            successText: "Clave correcta. CLAVE LITERARIA: Comala es en realidad una representación del Purgatorio. Un lugar sin redención posible donde el fatalismo (el destino trágico del que no se puede escapar) domina la existencia."
+          },
+          {
+            title: "Habitación 5: La ilusión enterrada",
+            context: `Juan Preciado ha muerto de miedo al escuchar los murmullos de Comala. Ahora se encuentra en su tumba, compartiendo ataúd con otra alma, Dorotea, la mendiga.`,
+            fragment: `—¿La ilusión? Eso cuesta caro. A mí me costó vivir más de lo debido. Pagué con eso la deuda de encontrar a mi hijo, que no fue, por decirlo así, sino una ilusión más; porque nunca tuve ningún hijo. Ahora que estoy muerta me he dado tiempo para pensar y enterarme de todo. Ni siquiera el nido para guardarlo me dio Dios. Sólo esa vida arrastrada que tuve, llevando de aquí para allá mis ojos tristes que siempre mirando de reojo como buscando detrás de la gente, sospechando que alguien me hubiera escondido a mi niño. Y todo fue culpa de un maldito sueño. He tenido dos: a uno de ellos lo llamo el "bendito" y al otro el "maldito". El primero fue el que me hizo soñar que había tenido un hijo. Y mientras viví, nunca dejé de creer que fuera cierto; porque lo sentí entre mis brazos, tiernito, lleno de boca y de ojos y de manos; durante mucho tiempo conservé en mis dedos la impresión de sus ojos dormidos y el palpitar de su corazón. ¿Cómo no iba a pensar que aquello fuera verdad? Lo llevaba conmigo a dondequiera que iba, envuelto en mi rebozo, y de pronto lo perdí. En el cielo me dijeron que se habían equivocado conmigo. Que me habían dado un corazón de madre, pero un seno de una cualquiera. Ése fue el otro sueño que tuve. Llegué al cielo y me asomé a ver si entre los ángeles reconocía la cara de mi hijo. Y nada. Todas las caras eran iguales, hechas con el mismo molde. Entonces pregunté. Uno de aquellos santos se me acercó y, sin decirme nada, hundió una de sus manos en mi estómago como si la hubiera hundido en un montón de cera. Al sacarla me enseñó algo así como una cáscara de nuez: "Esto prueba lo que te demuestra".
 "Tú sabes cómo hablan raro allá arriba; pero se les entiende. Les quise decir que aquello era sólo mi estómago engarruñado por las hambres y por el poco comer; pero otro de aquellos santos me empujó por los hombros y me enseñó la puerta de salida: 'Ve a descansar un poco más a la tierra, hija, y procura ser buena para que tu purgatorio sea menos largo.´
 "Ése fue el sueño 'maldito' que tuve y del cual saqué la aclaración de que nunca había tenido ningún hijo. Lo supe ya muy tarde, cuando el cuerpo se me había achaparrado, cuando el espinazo se me saltó por encima de la cabeza, cuando ya no podía caminar. Y de remate, el pueblo se fue quedando solo; todos largaron camino para otros rumbos y con ellos se fue también la caridad de la que yo vivía. Me senté a esperar la muerte. Después de que te encontramos a ti, se resolvieron mis huesos a quedarse quietos. 'Nadie me hará caso', pensé. Soy algo que no le estorba a nadie. Ya ves ni siquiera le robé espacio a la tierra. Me enterraron en la misma sepultura y cupe muy bien en el hueco de tus brazos. Aquí en este rincón donde me tienes ahora. Sólo se me ocurre ser yo la que te tuviera abrazado a ti. ¿Oyes? Allá afuera está lloviendo. ¿No sientes el golpear de la lluvia?"
 
 —¿Y tu alma? ¿Dónde crees que haya ido?
 —Debe andar vagando por la tierra como tantas otras; buscando vivos que recen por ella. Tal vez me odie por el mal trato que le di; pero eso ya no me preocupa. He descansado del vicio de sus remordimientos. Me amargaba hasta lo poco que comía, y me hacía insoportables las noches llenándomelas de pensamientos intranquilos con figuras de condenados y cosas de ésas. Cuando me senté a morir, ella me rogó que me levantara y que siguiera arrastrando la vida, como si esperara todavía algún milagro que me limpiara de culpas. Ni siquiera hice el intento: "Aquí se acaba el camino -le dije-. Ya no me quedan fuerzas para más." Y abrí la boca para que se fuera. Y se fue. Sentí cuando cayó en mis manos el hilito de sangre con que estaba amarrada a mi corazón.`,
-    question: "¿Cuál fue esa 'ilusión' que Dorotea persiguió durante toda su vida, envuelta en un rebozo, y que le impidió descansar en paz hasta entrar en la tumba con Juan Preciado?",
-    answers: ["hijo", "un hijo", "su hijo", "el hijo", "a su hijo", "un niño", "niño"],
-    placeholder: "Escribe la respuesta...",
-    successText: "Clave correcta. CLAVE LITERARIA: Aquí Rulfo alcanza la cima del Realismo Mágico: narra desde dentro de una tumba. Observa la dualidad cuerpo-alma y la polifonía (muchas voces que se entrelazan) característica de la novela."
-  },
-  {
-    title: "Habitación 6: El Amor Inalcanzable",
-    context: `La tiranía y crueldad del cacique Pedro Páramo tiene una única fisura: su amor absoluto y obsesivo desde la infancia por una mujer que nunca le correspondió totalmente, refugiada en su propia locura.`,
-    fragment: `Pensaba en ti... En las lomas verdes. Cuando volábamos papalotes en la época del aire. Oíamos allá abajo el rumor viviente del pueblo mientras estábamos encima de él, arriba de la loma, en tanto se nos iba el hilo de cáñamo arrastrado por el viento. "Ayúdame...". Y unas manos suaves se apretaban a nuestras manos. "Suelta más hilo".
+            question: "¿Cuál fue esa 'ilusión' que Dorotea persiguió durante toda su vida, envuelta en un rebozo, y que le impidió descansar en paz hasta entrar en la tumba con Juan Preciado?",
+            answers: ["hijo", "un hijo", "su hijo", "el hijo", "a su hijo", "un niño", "niño"],
+            placeholder: "Escribe la respuesta...",
+            successText: "Clave correcta. CLAVE LITERARIA: Aquí Rulfo alcanza la cima del Realismo Mágico: narra desde dentro de una tumba. Observa la dualidad cuerpo-alma y la polifonía (muchas voces que se entrelazan) característica de la novela."
+          },
+          {
+            title: "Habitación 6: El Amor Inalcanzable",
+            context: `La tiranía y crueldad del cacique Pedro Páramo tiene una única fisura: su amor absoluto y obsesivo desde la infancia por una mujer que nunca le correspondió totalmente, refugiada en su propia locura.`,
+            fragment: `Pensaba en ti... En las lomas verdes. Cuando volábamos papalotes en la época del aire. Oíamos allá abajo el rumor viviente del pueblo mientras estábamos encima de él, arriba de la loma, en tanto se nos iba el hilo de cáñamo arrastrado por el viento. "Ayúdame...". Y unas manos suaves se apretaban a nuestras manos. "Suelta más hilo".
 [...]
 —¿Quién es? —preguntó don Pedro.
 —Soy yo, don Pedro. Justina.
@@ -136,362 +176,343 @@ Era una cara común y corriente.
 Pedro Páramo se quedó sin expresión. Ni una sola lágrima, ni un solo lamento. Se levantó de la cama, arrastrando los pies y se asomó por la ventana al cielo oscurecido.
 "Me cruzaré de brazos y Comala se morirá de hambre".
 Y así lo hizo.`,
-    question: "¿Cuál es el nombre de esta mujer, el único amor verdadero de Pedro Páramo, cuya muerte le lleva a destruir a todo el pueblo por venganza?",
-    answers: ["susana", "susana san juan", "susana sanjuan"],
-    placeholder: "Escribe el nombre...",
-    successText: "Clave correcta. CLAVE LITERARIA: Susana San Juan es el ideal romántico, el único destello de pureza inalcanzable en el infierno de Comala. Al no tenerla, Pedro Páramo extingue la vida del pueblo entero."
-  },
-  {
-    title: "Habitación 7: El Parricidio y la Caída",
-    context: `La novela es un círculo perfecto de violencia. Juan Preciado no fue el único hijo abandonado. El cacique sembró hijos por toda la región. Uno de ellos, un arriero, regresa desesperado.`,
-    fragment: `—Dame algo... —dijo—. No tengo ni para enterrar a mi mujer.
+            question: "¿Cuál es el nombre de esta mujer, el único amor verdadero de Pedro Páramo, cuya muerte le lleva a destruir a todo el pueblo por venganza?",
+            answers: ["susana", "susana san juan", "susana sanjuan"],
+            placeholder: "Escribe el nombre...",
+            successText: "Clave correcta. CLAVE LITERARIA: Susana San Juan es el ideal romántico, el único destello de pureza inalcanzable en el infierno de Comala. Al no tenerla, Pedro Páramo extingue la vida del pueblo entero."
+          },
+          {
+            title: "Habitación 7: El Parricidio y la Caída",
+            context: `La novela es un círculo perfecto de violencia. Juan Preciado no fue el único hijo abandonado. El cacique sembró hijos por toda la región. Uno de ellos, un arriero, regresa desesperado.`,
+            fragment: `—Dame algo... —dijo—. No tengo ni para enterrar a mi mujer.
 Pedro Páramo lo miró. Vio que le temblaban las manos. Observó sus ojos enrojecidos, pidiendo piedad, llenos de un odio antiguo y suplicante.
 Volvió a decir:
 —Ayúdeme.
 Pedro Páramo no respondió. Él sacó un cuchillo y se lo clavó de lleno en el estómago. El cacique no hizo ningún gesto de dolor, solo abrió mucho los ojos como si por fin entendiera.
 Cayó de rodillas y luego de bruces. [...]
 Se apoyó en los brazos de Damiana Cisneros e hizo el intento de caminar. Después de unos cuantos pasos cayó, suplicando por dentro; pero sin decir una sola palabra. Dio un golpe seco contra la tierra y se fue desmoronando como si fuera un montón de piedras.`,
-    question: "¿Cómo se llama este arriero sordo, hijo no reconocido de Pedro Páramo, que termina asesinando al cacique (como se menciona en el vídeo introductorio)?",
-    answers: ["abundio", "abundio martinez", "el arriero", "arriero", "el arriero abundio"],
-    placeholder: "Escribe el nombre...",
-    successText: "Clave correcta. CLAVE LITERARIA: Un final magistral. Pedro Páramo cae 'como un montón de piedras', haciendo honor a su nombre (Pedro = Piedra, Páramo = tierra yerma). El cacique muere a manos de uno de sus muchos hijos abandonados, cerrando el ciclo de fatalidad."
-  }
-];
+            question: "¿Cómo se llama este arriero sordo, hijo no reconocido de Pedro Páramo, que termina asesinando al cacique (como se menciona en el vídeo introductorio)?",
+            answers: ["abundio", "abundio martinez", "el arriero", "arriero", "el arriero abundio"],
+            placeholder: "Escribe el nombre...",
+            successText: "Clave correcta. CLAVE LITERARIA: Un final magistral. Pedro Páramo cae 'como un montón de piedras', haciendo honor a su nombre (Pedro = Piedra, Páramo = tierra yerma). El cacique muere a manos de uno de sus muchos hijos abandonados, cerrando el ciclo de fatalidad."
+          }
+        ];
 
-export default function App() {
-  const [currentStage, setCurrentStage] = useState(0);
-  const [inputValue, setInputValue] = useState('');
-  const [errorMsg, setErrorMsg] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [hasStarted, setHasStarted] = useState(false);
-  
-  // Premium Features State
-  const [showPremium, setShowPremium] = useState(false);
-  const [premiumTab, setPremiumTab] = useState('arbol');
-
-  const handleCheck = () => {
-    const stage = fragments[currentStage];
-    const normalizedInput = normalizeString(inputValue);
-    const isCorrect = stage.answers.some(ans => normalizeString(ans) === normalizedInput);
-
-    if (isCorrect) {
-      setShowSuccess(true);
-      setErrorMsg(false);
-    } else {
-      setErrorMsg(true);
-      setTimeout(() => setErrorMsg(false), 3000);
-    }
-  };
-
-  const handleNext = () => {
-    setInputValue('');
-    setShowSuccess(false);
-    setCurrentStage(prev => prev + 1);
-  };
-
-  const renderPremiumModal = () => {
-    if (!showPremium) return null;
-
-    return (
-      <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-        <div className="bg-stone-900 border-2 border-amber-600 rounded-xl w-full max-w-4xl h-[80vh] flex flex-col shadow-2xl overflow-hidden relative">
-          <button 
-            onClick={() => setShowPremium(false)}
-            className="absolute top-4 right-4 text-stone-400 hover:text-white bg-stone-800 p-2 rounded-full z-10"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-          </button>
+        function App() {
+          const [currentStage, setCurrentStage] = useState(0);
+          const [inputValue, setInputValue] = useState('');
+          const [errorMsg, setErrorMsg] = useState(false);
+          const [showSuccess, setShowSuccess] = useState(false);
+          const [hasStarted, setHasStarted] = useState(false);
           
-          <div className="flex flex-col md:flex-row h-full">
-            {/* Tabs Sidebar */}
-            <div className="bg-stone-950 w-full md:w-64 border-r border-stone-800 p-4 flex flex-row md:flex-col overflow-x-auto">
-              <h3 className="hidden md:block text-amber-500 font-serif text-xl mb-6 text-center border-b border-stone-800 pb-4">Códice Premium</h3>
-              <button onClick={() => setPremiumTab('arbol')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'arbol' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🌿 Árbol Genealógico</button>
-              <button onClick={() => setPremiumTab('simbolos')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'simbolos' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🗝️ Simbología Rulfiana</button>
-              <button onClick={() => setPremiumTab('selectividad')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'selectividad' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🎓 Guía EBAU</button>
-            </div>
+          const [showPremium, setShowPremium] = useState(false);
+          const [premiumTab, setPremiumTab] = useState('arbol');
 
-            {/* Content Area */}
-            <div className="flex-1 p-6 md:p-10 overflow-y-auto text-stone-300">
-              {premiumTab === 'arbol' && (
-                <div>
-                  <h2 className="text-3xl font-serif text-amber-500 mb-6">El Linaje de Comala</h2>
-                  <div className="bg-stone-800/50 p-6 rounded-lg border border-stone-700">
-                    <p className="mb-4"><strong>PEDRO PÁRAMO (El Cacique)</strong></p>
-                    <ul className="list-disc pl-8 space-y-4 mb-6 border-l-2 border-stone-600 ml-2">
-                      <li>
-                        Hijo con Dolores Preciado (Matrimonio por conveniencia):<br/>
-                        <span className="text-amber-400 font-bold">&rarr; Juan Preciado</span> (Viene a Comala buscando lo suyo, muere de miedo).
-                      </li>
-                      <li>
-                        Hijo con madre anónima (Crianza a cargo de Damiana):<br/>
-                        <span className="text-amber-400 font-bold">&rarr; Miguel Páramo</span> (Cruel, abusador, muere al caer de su caballo "El Colorado").
-                      </li>
-                      <li>
-                        Hijo no reconocido (Madre enferma):<br/>
-                        <span className="text-amber-400 font-bold">&rarr; Abundio Martínez</span> (El arriero sordo. Guía a Juan al inicio y asesina a Pedro al final).
-                      </li>
-                    </ul>
-                    <div className="mt-8 pt-4 border-t border-stone-700">
-                      <p className="mb-2"><strong>EL AMOR IMPOSIBLE:</strong></p>
-                      <p className="text-pink-300 ml-4">&hearts; <strong>Susana San Juan:</strong> La única mujer a la que Pedro Páramo ama realmente. Está loca, obsesionada con su difunto marido (Florencio). Su muerte provoca la ira de Pedro y la destrucción de Comala.</p>
+          const handleCheck = () => {
+            const stage = fragments[currentStage];
+            const normalizedInput = normalizeString(inputValue);
+            const isCorrect = stage.answers.some(ans => normalizeString(ans) === normalizedInput);
+
+            if (isCorrect) {
+              setShowSuccess(true);
+              setErrorMsg(false);
+            } else {
+              setErrorMsg(true);
+              setTimeout(() => setErrorMsg(false), 3000);
+            }
+          };
+
+          const handleNext = () => {
+            setInputValue('');
+            setShowSuccess(false);
+            setCurrentStage(prev => prev + 1);
+          };
+
+          const renderPremiumModal = () => {
+            if (!showPremium) return null;
+
+            return (
+              <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+                <div className="bg-stone-900 border-2 border-amber-600 rounded-xl w-full max-w-4xl h-[80vh] flex flex-col shadow-2xl overflow-hidden relative">
+                  <button 
+                    onClick={() => setShowPremium(false)}
+                    className="absolute top-4 right-4 text-stone-400 hover:text-white bg-stone-800 p-2 rounded-full z-10"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                  </button>
+                  
+                  <div className="flex flex-col md:flex-row h-full">
+                    {/* Tabs Sidebar */}
+                    <div className="bg-stone-950 w-full md:w-64 border-r border-stone-800 p-4 flex flex-row md:flex-col overflow-x-auto">
+                      <h3 className="hidden md:block text-amber-500 font-serif text-xl mb-6 text-center border-b border-stone-800 pb-4">Códice Premium</h3>
+                      <button onClick={() => setPremiumTab('arbol')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'arbol' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🌿 Árbol Genealógico</button>
+                      <button onClick={() => setPremiumTab('simbolos')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'simbolos' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🗝️ Simbología Rulfiana</button>
+                      <button onClick={() => setPremiumTab('selectividad')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'selectividad' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🎓 Guía EBAU</button>
+                    </div>
+
+                    {/* Content Area */}
+                    <div className="flex-1 p-6 md:p-10 overflow-y-auto text-stone-300">
+                      {premiumTab === 'arbol' && (
+                        <div>
+                          <h2 className="text-3xl font-serif text-amber-500 mb-6">El Linaje de Comala</h2>
+                          <div className="bg-stone-800/50 p-6 rounded-lg border border-stone-700">
+                            <p className="mb-4"><strong>PEDRO PÁRAMO (El Cacique)</strong></p>
+                            <ul className="list-disc pl-8 space-y-4 mb-6 border-l-2 border-stone-600 ml-2">
+                              <li>
+                                Hijo con Dolores Preciado (Matrimonio por conveniencia):<br/>
+                                <span className="text-amber-400 font-bold">&rarr; Juan Preciado</span> (Viene a Comala buscando lo suyo, muere de miedo).
+                              </li>
+                              <li>
+                                Hijo con madre anónima (Crianza a cargo de Damiana):<br/>
+                                <span className="text-amber-400 font-bold">&rarr; Miguel Páramo</span> (Cruel, abusador, muere al caer de su caballo "El Colorado").
+                              </li>
+                              <li>
+                                Hijo no reconocido (Madre enferma):<br/>
+                                <span className="text-amber-400 font-bold">&rarr; Abundio Martínez</span> (El arriero sordo. Guía a Juan al inicio y asesina a Pedro al final).
+                              </li>
+                            </ul>
+                            <div className="mt-8 pt-4 border-t border-stone-700">
+                              <p className="mb-2"><strong>EL AMOR IMPOSIBLE:</strong></p>
+                              <p className="text-pink-300 ml-4">&hearts; <strong>Susana San Juan:</strong> La única mujer a la que Pedro Páramo ama realmente. Está loca, obsesionada con su difunto marido (Florencio). Su muerte provoca la ira de Pedro y la destrucción de Comala.</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {premiumTab === 'simbolos' && (
+                        <div>
+                          <h2 className="text-3xl font-serif text-amber-500 mb-6">Simbología en la Obra</h2>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="bg-stone-800 p-5 rounded border border-stone-700">
+                              <h4 className="text-xl text-blue-400 mb-2">💧 El Agua / La Lluvia</h4>
+                              <p className="text-sm text-stone-400">Representa la vida, la pureza y la fertilidad. Casi siempre aparece ligada a los recuerdos felices de Pedro Páramo sobre su infancia junto a Susana San Juan.</p>
+                            </div>
+                            <div className="bg-stone-800 p-5 rounded border border-stone-700">
+                              <h4 className="text-xl text-orange-400 mb-2">🔥 El Calor / La Sequía</h4>
+                              <p className="text-sm text-stone-400">Representa el infierno, el castigo y la muerte. Es el ambiente asfixiante del presente de Juan Preciado en Comala.</p>
+                            </div>
+                            <div className="bg-stone-800 p-5 rounded border border-stone-700">
+                              <h4 className="text-xl text-gray-400 mb-2">🗣️ Los Murmullos</h4>
+                              <p className="text-sm text-stone-400">Son la manifestación física de los pecados no perdonados. Comala no tiene habitantes vivos, solo ecos y voces de almas en pena atrapadas en un Purgatorio perpetuo.</p>
+                            </div>
+                            <div className="bg-stone-800 p-5 rounded border border-stone-700">
+                              <h4 className="text-xl text-yellow-600 mb-2">🌾 La Media Luna</h4>
+                              <p className="text-sm text-stone-400">La hacienda de Pedro Páramo. Símbolo del latifundismo mexicano, del poder opresor y absoluto del cacique sobre la tierra y las personas.</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {premiumTab === 'selectividad' && (
+                        <div>
+                          <h2 className="text-3xl font-serif text-amber-500 mb-6">Guía para Exámenes (EBAU)</h2>
+                          <div className="space-y-4">
+                            <div className="bg-stone-800 p-4 rounded-l border-l-4 border-amber-500">
+                              <h4 className="font-bold text-white mb-1">Estructura Fragmentaria</h4>
+                              <p className="text-sm text-stone-400">Recuerda mencionar que la novela NO tiene capítulos, sino unos 70 fragmentos separados por espacios en blanco. Esto obliga al lector a ser "activo" para armar el rompecabezas narrativo.</p>
+                            </div>
+                            <div className="bg-stone-800 p-4 rounded-l border-l-4 border-amber-500">
+                              <h4 className="font-bold text-white mb-1">El Tiempo Circular</h4>
+                              <p className="text-sm text-stone-400">El tiempo en Comala está estancado. Hay constantes saltos temporales (analepsis) entre el viaje de Juan Preciado (presente) y el apogeo del cacique Pedro Páramo (pasado).</p>
+                            </div>
+                            <div className="bg-stone-800 p-4 rounded-l border-l-4 border-amber-500">
+                              <h4 className="font-bold text-white mb-1">La Polifonía</h4>
+                              <p className="text-sm text-stone-400">A lo largo de la obra se cruzan decenas de voces en primera, segunda y tercera persona, mezclando narrador omnisciente con monólogos desde el interior de las tumbas.</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
-              )}
+              </div>
+            );
+          };
 
-              {premiumTab === 'simbolos' && (
-                <div>
-                  <h2 className="text-3xl font-serif text-amber-500 mb-6">Simbología en la Obra</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-stone-800 p-5 rounded border border-stone-700">
-                      <h4 className="text-xl text-blue-400 mb-2">💧 El Agua / La Lluvia</h4>
-                      <p className="text-sm text-stone-400">Representa la vida, la pureza y la fertilidad. Casi siempre aparece ligada a los recuerdos felices de Pedro Páramo sobre su infancia junto a Susana San Juan.</p>
+          if (!hasStarted) {
+            return (
+              <div className="min-h-screen bg-stone-900 text-stone-300 font-sans flex flex-col items-center py-10 px-4">
+                
+                <button 
+                  onClick={() => setShowPremium(true)}
+                  className="fixed bottom-6 right-6 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-6 rounded-full shadow-[0_0_15px_rgba(217,119,6,0.5)] flex items-center gap-2 transition-transform hover:scale-105 z-40"
+                >
+                  <span>🌟 Funciones Premium</span>
+                </button>
+
+                {renderPremiumModal()}
+
+                <div className="max-w-4xl w-full border border-stone-700 p-8 md:p-12 rounded-lg shadow-2xl bg-stone-800/50">
+                  <h1 className="text-4xl md:text-6xl font-serif text-amber-600 mb-4 tracking-wider text-center">ESCAPE DE COMALA</h1>
+                  <p className="text-lg md:text-xl mb-8 italic text-stone-400 text-center">"Vine a Comala porque me dijeron que acá vivía mi padre, un tal Pedro Páramo..."</p>
+                  
+                  <div className="mb-10 bg-stone-950 p-2 rounded-lg shadow-inner">
+                    <h3 className="text-amber-500 mb-4 text-center font-bold uppercase tracking-widest text-sm">Prólogo Visual: Repaso de la Obra</h3>
+                    <div className="aspect-video w-full rounded overflow-hidden shadow-lg border border-stone-800">
+                      <iframe 
+                        className="w-full h-full"
+                        src="https://www.youtube.com/embed/KLLoLkYAmgM" 
+                        title="PEDRO PÁRAMO de Juan Rulfo (Resumen) | Draw My Life" 
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowFullScreen>
+                      </iframe>
                     </div>
-                    <div className="bg-stone-800 p-5 rounded border border-stone-700">
-                      <h4 className="text-xl text-orange-400 mb-2">🔥 El Calor / La Sequía</h4>
-                      <p className="text-sm text-stone-400">Representa el infierno, el castigo y la muerte. Es el ambiente asfixiante del presente de Juan Preciado en Comala.</p>
-                    </div>
-                    <div className="bg-stone-800 p-5 rounded border border-stone-700">
-                      <h4 className="text-xl text-gray-400 mb-2">🗣️ Los Murmullos</h4>
-                      <p className="text-sm text-stone-400">Son la manifestación física de los pecados no perdonados. Comala no tiene habitantes vivos, solo ecos y voces de almas en pena atrapadas en un Purgatorio perpetuo.</p>
-                    </div>
-                    <div className="bg-stone-800 p-5 rounded border border-stone-700">
-                      <h4 className="text-xl text-yellow-600 mb-2">🌾 La Media Luna</h4>
-                      <p className="text-sm text-stone-400">La hacienda de Pedro Páramo. Símbolo del latifundismo mexicano, del poder opresor y absoluto del cacique sobre la tierra y las personas.</p>
-                    </div>
+                    <p className="text-xs text-stone-500 text-center mt-3">Mira este vídeo resumen para refrescar la historia antes de enfrentarte a los enigmas de Comala.</p>
+                  </div>
+
+                  <p className="mb-8 leading-relaxed text-center text-lg text-stone-300">
+                    Bienvenidos a Comala, un lugar donde el tiempo no avanza, las puertas no tienen cerraduras y los muertos hablan más que los vivos. 
+                    Estáis atrapados en el purgatorio literario de Juan Rulfo. Para escapar y no convertiros en un murmullo más, deberéis leer atentamente las voces del pasado, desentrañar los secretos del Realismo Mágico y descubrir las palabras clave que abren la salida.
+                  </p>
+                  
+                  <div className="flex justify-center">
+                    <button 
+                      onClick={() => setHasStarted(true)}
+                      className="px-10 py-4 bg-amber-700 hover:bg-amber-600 text-white font-bold text-lg rounded transition duration-300 shadow-[0_0_20px_rgba(180,83,9,0.4)]"
+                    >
+                      Adentrarse en el Páramo
+                    </button>
                   </div>
                 </div>
-              )}
+              </div>
+            );
+          }
 
-              {premiumTab === 'selectividad' && (
-                <div>
-                  <h2 className="text-3xl font-serif text-amber-500 mb-6">Guía para Exámenes (EBAU)</h2>
-                  <div className="space-y-4">
-                    <div className="bg-stone-800 p-4 rounded-l border-l-4 border-amber-500">
-                      <h4 className="font-bold text-white mb-1">Estructura Fragmentaria</h4>
-                      <p className="text-sm text-stone-400">Recuerda mencionar que la novela NO tiene capítulos, sino unos 70 fragmentos separados por espacios en blanco. Esto obliga al lector a ser "activo" para armar el rompecabezas narrativo.</p>
-                    </div>
-                    <div className="bg-stone-800 p-4 rounded-l border-l-4 border-amber-500">
-                      <h4 className="font-bold text-white mb-1">El Tiempo Circular</h4>
-                      <p className="text-sm text-stone-400">El tiempo en Comala está estancado. Hay constantes saltos temporales (analepsis) entre el viaje de Juan Preciado (presente) y el apogeo del cacique Pedro Páramo (pasado).</p>
-                    </div>
-                    <div className="bg-stone-800 p-4 rounded-l border-l-4 border-amber-500">
-                      <h4 className="font-bold text-white mb-1">La Polifonía</h4>
-                      <p className="text-sm text-stone-400">A lo largo de la obra se cruzan decenas de voces en primera, segunda y tercera persona, mezclando narrador omnisciente con monólogos desde el interior de las tumbas.</p>
-                    </div>
+          if (currentStage >= fragments.length) {
+            return (
+              <div className="min-h-screen bg-stone-900 text-stone-300 font-sans flex flex-col items-center justify-center p-6 text-center">
+                <button 
+                  onClick={() => setShowPremium(true)}
+                  className="fixed bottom-6 right-6 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-6 rounded-full shadow-[0_0_15px_rgba(217,119,6,0.5)] flex items-center gap-2 transition-transform hover:scale-105 z-40"
+                >
+                  <span>🌟 Funciones Premium</span>
+                </button>
+                {renderPremiumModal()}
+
+                <div className="max-w-2xl border-2 border-amber-600 p-10 rounded-lg shadow-2xl bg-stone-800">
+                  <h1 className="text-4xl md:text-5xl font-serif text-amber-500 mb-6">¡HAS ESCAPADO DE COMALA!</h1>
+                  <p className="text-lg mb-6 leading-relaxed">
+                    Has sabido escuchar a las ánimas, has entendido el dolor del remordimiento y el peso de la ilusión. 
+                    Has descifrado los códigos del <span className="font-bold text-white">Realismo Mágico</span> y has presenciado la caída del cacique <span className="font-bold text-white">Pedro Páramo</span>.
+                  </p>
+                  <p className="italic text-stone-400 mb-8 border-l-4 border-stone-600 pl-4 py-2 bg-stone-900">
+                    "Hacía tantos años que no alzaba la cara, que me olvidé del cielo."
+                  </p>
+                  <div className="bg-green-900/30 border border-green-800 p-4 rounded text-sm text-green-200 mb-8">
+                    Reto literario superado. Ya estás listo para enfrentarte al examen de Lengua Castellana y Literatura. Revisa el apartado de <strong>Funciones Premium</strong> para estudiar tus apuntes finales.
                   </div>
+                  <button 
+                    onClick={() => {setHasStarted(false); setCurrentStage(0);}}
+                    className="px-8 py-3 bg-stone-700 hover:bg-stone-600 text-white rounded transition font-bold"
+                  >
+                    Volver al inicio
+                  </button>
                 </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
+              </div>
+            );
+          }
 
-  if (!hasStarted) {
-    return (
-      <div className="min-h-screen bg-stone-900 text-stone-300 font-sans flex flex-col items-center py-10 px-4">
-        
-        {/* Floating Premium Button */}
-        <button 
-          onClick={() => setShowPremium(true)}
-          className="fixed bottom-6 right-6 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-6 rounded-full shadow-[0_0_15px_rgba(217,119,6,0.5)] flex items-center gap-2 transition-transform hover:scale-105 z-40"
-        >
-          <span>🌟 Funciones Premium</span>
-        </button>
+          const stage = fragments[currentStage];
 
-        {renderPremiumModal()}
-
-        <div className="max-w-4xl w-full border border-stone-700 p-8 md:p-12 rounded-lg shadow-2xl bg-stone-800/50">
-          <h1 className="text-4xl md:text-6xl font-serif text-amber-600 mb-4 tracking-wider text-center">ESCAPE DE COMALA</h1>
-          <p className="text-lg md:text-xl mb-8 italic text-stone-400 text-center">"Vine a Comala porque me dijeron que acá vivía mi padre, un tal Pedro Páramo..."</p>
-          
-          <div className="mb-10 bg-stone-950 p-2 rounded-lg shadow-inner">
-            <h3 className="text-amber-500 mb-4 text-center font-bold uppercase tracking-widest text-sm">Prólogo Visual: Repaso de la Obra</h3>
-            <div className="aspect-video w-full rounded overflow-hidden shadow-lg border border-stone-800">
-              <iframe 
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/KLLoLkYAmgM" 
-                title="PEDRO PÁRAMO de Juan Rulfo (Resumen) | Draw My Life" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen>
-              </iframe>
-            </div>
-            <p className="text-xs text-stone-500 text-center mt-3">Mira este vídeo resumen para refrescar la historia antes de enfrentarte a los enigmas de Comala.</p>
-          </div>
-
-          <p className="mb-8 leading-relaxed text-center text-lg text-stone-300">
-            Bienvenidos a Comala, un lugar donde el tiempo no avanza, las puertas no tienen cerraduras y los muertos hablan más que los vivos. 
-            Estáis atrapados en el purgatorio literario de Juan Rulfo. Para escapar y no convertiros en un murmullo más, deberéis leer atentamente las voces del pasado, desentrañar los secretos del Realismo Mágico y descubrir las palabras clave que abren la salida.
-          </p>
-          
-          <div className="flex justify-center">
-            <button 
-              onClick={() => setHasStarted(true)}
-              className="px-10 py-4 bg-amber-700 hover:bg-amber-600 text-white font-bold text-lg rounded transition duration-300 shadow-[0_0_20px_rgba(180,83,9,0.4)]"
-            >
-              Adentrarse en el Páramo
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (currentStage >= fragments.length) {
-    return (
-      <div className="min-h-screen bg-stone-900 text-stone-300 font-sans flex flex-col items-center justify-center p-6 text-center">
-        {/* Floating Premium Button */}
-        <button 
-          onClick={() => setShowPremium(true)}
-          className="fixed bottom-6 right-6 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-6 rounded-full shadow-[0_0_15px_rgba(217,119,6,0.5)] flex items-center gap-2 transition-transform hover:scale-105 z-40"
-        >
-          <span>🌟 Funciones Premium</span>
-        </button>
-        {renderPremiumModal()}
-
-        <div className="max-w-2xl border-2 border-amber-600 p-10 rounded-lg shadow-2xl bg-stone-800">
-          <h1 className="text-4xl md:text-5xl font-serif text-amber-500 mb-6">¡HAS ESCAPADO DE COMALA!</h1>
-          <p className="text-lg mb-6 leading-relaxed">
-            Has sabido escuchar a las ánimas, has entendido el dolor del remordimiento y el peso de la ilusión. 
-            Has descifrado los códigos del <span className="font-bold text-white">Realismo Mágico</span> y has presenciado la caída del cacique <span className="font-bold text-white">Pedro Páramo</span>.
-          </p>
-          <p className="italic text-stone-400 mb-8 border-l-4 border-stone-600 pl-4 py-2 bg-stone-900">
-            "Hacía tantos años que no alzaba la cara, que me olvidé del cielo."
-          </p>
-          <div className="bg-green-900/30 border border-green-800 p-4 rounded text-sm text-green-200 mb-8">
-            Reto literario superado. Ya estás listo para enfrentarte al examen de Lengua Castellana y Literatura. Revisa el apartado de <strong>Funciones Premium</strong> para estudiar tus apuntes finales.
-          </div>
-          <button 
-            onClick={() => {setHasStarted(false); setCurrentStage(0);}}
-            className="px-8 py-3 bg-stone-700 hover:bg-stone-600 text-white rounded transition font-bold"
-          >
-            Volver al inicio
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  const stage = fragments[currentStage];
-
-  return (
-    <div className="min-h-screen bg-stone-950 text-stone-300 font-sans flex flex-col items-center py-10 px-4 md:px-10">
-      
-      {/* Floating Premium Button */}
-      <button 
-        onClick={() => setShowPremium(true)}
-        className="fixed bottom-6 right-6 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-6 rounded-full shadow-[0_0_15px_rgba(217,119,6,0.5)] flex items-center gap-2 transition-transform hover:scale-105 z-40"
-      >
-        <span>🌟 Funciones Premium</span>
-      </button>
-
-      {renderPremiumModal()}
-
-      {/* Header Progress */}
-      <div className="w-full max-w-6xl flex justify-between items-center mb-6 border-b border-stone-800 pb-4">
-        <h2 className="text-xl md:text-2xl font-serif text-amber-600 uppercase tracking-widest">
-          {stage.title}
-        </h2>
-        <span className="text-stone-500 bg-stone-900 px-3 py-1 rounded border border-stone-800 font-bold">
-          Nivel {currentStage + 1} de {fragments.length}
-        </span>
-      </div>
-
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
-        {/* Left Column: Text/Fragment */}
-        <div className="bg-stone-900 border border-stone-800 rounded-lg p-6 shadow-xl flex flex-col h-full">
-          <h3 className="text-amber-500 font-bold mb-4 uppercase text-sm tracking-wider flex items-center gap-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-            Documento recuperado
-          </h3>
-          
-          <div className="text-stone-400 mb-6 leading-relaxed bg-stone-950 p-4 rounded text-sm border-l-2 border-amber-700/50">
-            {stage.context.split('\n').map((paragraph, i) => (
-              <p key={i} className="mb-2">{paragraph}</p>
-            ))}
-          </div>
-
-          {stage.fragment && (
-            <div className="flex-grow bg-stone-800 p-6 rounded font-serif text-stone-200 leading-relaxed shadow-inner overflow-y-auto max-h-[50vh] text-sm md:text-base border border-stone-700 custom-scrollbar">
-              {stage.fragment.split('\n').map((line, i) => (
-                <p key={i} className="mb-3">{line}</p>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Right Column: Interaction */}
-        <div className="bg-stone-900 border border-stone-800 rounded-lg p-6 shadow-xl flex flex-col justify-center relative min-h-[400px]">
-          
-          <div className="text-center mb-8">
-            <svg className="w-16 h-16 mx-auto text-amber-700/50 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-            <h3 className="text-2xl font-serif text-amber-100 mb-4">El Enigma del Páramo</h3>
-            <p className="text-stone-400 text-lg">{stage.question}</p>
-          </div>
-
-          {!showSuccess ? (
-            <div className="flex flex-col items-center">
-              <input 
-                type="text" 
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleCheck()}
-                placeholder={stage.placeholder}
-                className="w-full max-w-sm px-4 py-4 bg-stone-950 border-2 border-stone-700 rounded text-center text-xl text-amber-500 focus:outline-none focus:border-amber-600 transition mb-6 shadow-inner"
-              />
-              <button 
-                onClick={handleCheck}
-                className="w-full max-w-sm px-6 py-4 bg-amber-800 hover:bg-amber-700 text-white font-bold rounded transition shadow-lg uppercase tracking-wider text-lg"
-              >
-                Comprobar Clave
-              </button>
+          return (
+            <div className="min-h-screen bg-stone-950 text-stone-300 font-sans flex flex-col items-center py-10 px-4 md:px-10">
               
-              {errorMsg && (
-                <div className="mt-6 text-red-300 bg-red-900/40 border border-red-800 px-6 py-3 rounded animate-pulse text-center">
-                  El eco te devuelve tu respuesta... <br/> No es la palabra correcta.
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="flex flex-col items-center bg-stone-950 p-8 rounded border-2 border-green-800 shadow-[0_0_20px_rgba(22,101,52,0.3)]">
-              <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              <p className="text-stone-200 text-center mb-8 leading-relaxed text-lg">
-                {stage.successText}
-              </p>
               <button 
-                onClick={handleNext}
-                className="w-full max-w-sm px-6 py-4 bg-green-800 hover:bg-green-700 text-white font-bold rounded transition shadow-lg uppercase tracking-wider text-lg animate-bounce"
+                onClick={() => setShowPremium(true)}
+                className="fixed bottom-6 right-6 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-6 rounded-full shadow-[0_0_15px_rgba(217,119,6,0.5)] flex items-center gap-2 transition-transform hover:scale-105 z-40"
               >
-                Avanzar en la niebla &rarr;
+                <span>🌟 Funciones Premium</span>
               </button>
-            </div>
-          )}
 
-        </div>
-      </div>
-      
-      {/* Styles for scrollbar */}
-      <style dangerouslySetInnerHTML={{__html: `
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
+              {renderPremiumModal()}
+
+              <div className="w-full max-w-6xl flex justify-between items-center mb-6 border-b border-stone-800 pb-4">
+                <h2 className="text-xl md:text-2xl font-serif text-amber-600 uppercase tracking-widest">
+                  {stage.title}
+                </h2>
+                <span className="text-stone-500 bg-stone-900 px-3 py-1 rounded border border-stone-800 font-bold">
+                  Nivel {currentStage + 1} de {fragments.length}
+                </span>
+              </div>
+
+              <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <div className="bg-stone-900 border border-stone-800 rounded-lg p-6 shadow-xl flex flex-col h-full">
+                  <h3 className="text-amber-500 font-bold mb-4 uppercase text-sm tracking-wider flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    Documento recuperado
+                  </h3>
+                  
+                  <div className="text-stone-400 mb-6 leading-relaxed bg-stone-950 p-4 rounded text-sm border-l-2 border-amber-700/50">
+                    {stage.context.split('\n').map((paragraph, i) => (
+                      <p key={i} className="mb-2">{paragraph}</p>
+                    ))}
+                  </div>
+
+                  {stage.fragment && (
+                    <div className="flex-grow bg-stone-800 p-6 rounded font-serif text-stone-200 leading-relaxed shadow-inner overflow-y-auto max-h-[50vh] text-sm md:text-base border border-stone-700 custom-scrollbar">
+                      {stage.fragment.split('\n').map((line, i) => (
+                        <p key={i} className="mb-3">{line}</p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="bg-stone-900 border border-stone-800 rounded-lg p-6 shadow-xl flex flex-col justify-center relative min-h-[400px]">
+                  
+                  <div className="text-center mb-8">
+                    <svg className="w-16 h-16 mx-auto text-amber-700/50 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                    <h3 className="text-2xl font-serif text-amber-100 mb-4">El Enigma del Páramo</h3>
+                    <p className="text-stone-400 text-lg">{stage.question}</p>
+                  </div>
+
+                  {!showSuccess ? (
+                    <div className="flex flex-col items-center">
+                      <input 
+                        type="text" 
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleCheck()}
+                        placeholder={stage.placeholder}
+                        className="w-full max-w-sm px-4 py-4 bg-stone-950 border-2 border-stone-700 rounded text-center text-xl text-amber-500 focus:outline-none focus:border-amber-600 transition mb-6 shadow-inner"
+                      />
+                      <button 
+                        onClick={handleCheck}
+                        className="w-full max-w-sm px-6 py-4 bg-amber-800 hover:bg-amber-700 text-white font-bold rounded transition shadow-lg uppercase tracking-wider text-lg"
+                      >
+                        Comprobar Clave
+                      </button>
+                      
+                      {errorMsg && (
+                        <div className="mt-6 text-red-300 bg-red-900/40 border border-red-800 px-6 py-3 rounded animate-pulse text-center">
+                          El eco te devuelve tu respuesta... <br/> No es la palabra correcta.
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center bg-stone-950 p-8 rounded border-2 border-green-800 shadow-[0_0_20px_rgba(22,101,52,0.3)]">
+                      <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <p className="text-stone-200 text-center mb-8 leading-relaxed text-lg">
+                        {stage.successText}
+                      </p>
+                      <button 
+                        onClick={handleNext}
+                        className="w-full max-w-sm px-6 py-4 bg-green-800 hover:bg-green-700 text-white font-bold rounded transition shadow-lg uppercase tracking-wider text-lg animate-bounce"
+                      >
+                        Avanzar en la niebla &rarr;
+                      </button>
+                    </div>
+                  )}
+
+                </div>
+              </div>
+            </div>
+          );
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #1c1917; 
-          border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #44403c; 
-          border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #57534e; 
-        }
-      `}} />
-    </div>
-  );
-}
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
