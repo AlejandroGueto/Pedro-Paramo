@@ -250,6 +250,7 @@ Se apoyó en los brazos de Damiana Cisneros e hizo el intento de caminar. Despu�
                       <button onClick={() => setPremiumTab('arbol')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'arbol' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🌿 Árbol Genealógico</button>
                       <button onClick={() => setPremiumTab('simbolos')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'simbolos' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🗝️ Simbología Rulfiana</button>
                       <button onClick={() => setPremiumTab('selectividad')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'selectividad' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🎓 Características de la obra</button>
+                      <button onClick={() => setPremiumTab('historia')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'historia' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>⚔️ Contexto Histórico</button>
                     </div>
 
                     {/* Content Area */}
@@ -337,6 +338,37 @@ Se apoyó en los brazos de Damiana Cisneros e hizo el intento de caminar. Despu�
                             <div className="bg-stone-800 p-4 rounded-l border-l-4 border-amber-500">
                               <h4 className="font-bold text-white mb-1">La Polifonía</h4>
                               <p className="text-sm text-stone-400">A lo largo de la obra se cruzan decenas de voces en primera, segunda y tercera persona, mezclando narrador omnisciente con monólogos desde el interior de las tumbas.</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                                            {premiumTab === 'historia' && (
+                        <div>
+                          <h2 className="text-3xl font-serif text-amber-500 mb-6">El Trasfondo de la Muerte</h2>
+                          
+                          <div className="space-y-6">
+                            <div className="bg-stone-800 p-5 rounded-lg border border-stone-700">
+                              <h3 className="text-xl text-red-400 font-bold mb-3 flex items-center gap-2">
+                                <span>🔫</span> La Revolución Mexicana (1910-1920)
+                              </h3>
+                              <p className="text-sm text-stone-300 mb-3">
+                                Conflicto armado que buscaba derrocar la dictadura de Porfirio Díaz y lograr el reparto justo de tierras ("Tierra y Libertad").
+                              </p>
+                              <div className="bg-stone-900 p-3 rounded text-sm text-stone-400 border-l-2 border-red-500">
+                                <strong className="text-white">En la novela:</strong> Rulfo muestra el fracaso de la Revolución. Los caciques como Pedro Páramo no perdieron su poder; simplemente compraron a los líderes revolucionarios o pactaron con ellos para proteger la hacienda de la Media Luna. La justicia social nunca llegó a Comala.
+                              </div>
+                            </div>
+
+                            <div className="bg-stone-800 p-5 rounded-lg border border-stone-700">
+                              <h3 className="text-xl text-yellow-500 font-bold mb-3 flex items-center gap-2">
+                                <span>✝️</span> La Guerra Cristera (1926-1929)
+                              </h3>
+                              <p className="text-sm text-stone-300 mb-3">
+                                Rebelión armada de campesinos católicos (los "cristeros") contra el gobierno mexicano, que había prohibido el culto público y confiscado bienes a la Iglesia.
+                              </p>
+                              <div className="bg-stone-900 p-3 rounded text-sm text-stone-400 border-l-2 border-yellow-500">
+                                <strong className="text-white">En la novela:</strong> Dejó el campo sembrado de cadáveres y pueblos fantasmas. El Padre Rentería acaba uniéndose a los cristeros. La infancia de Rulfo estuvo marcada por esta masacre (su padre y sus tíos murieron en ella), lo que inspiró el ambiente de orfandad y luto eterno de Comala.
+                              </div>
                             </div>
                           </div>
                         </div>
