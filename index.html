@@ -251,6 +251,7 @@ Se apoyó en los brazos de Damiana Cisneros e hizo el intento de caminar. Despu�
                       <button onClick={() => setPremiumTab('simbolos')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'simbolos' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🗝️ Simbología Rulfiana</button>
                       <button onClick={() => setPremiumTab('selectividad')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'selectividad' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🎓 Características de la obra</button>
                       <button onClick={() => setPremiumTab('historia')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'historia' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>⚔️ Contexto Histórico</button>
+                      <button onClick={() => setPremiumTab('realismo')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'realismo' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🔮 Realismo Mágico</button>
                     </div>
 
                     {/* Content Area */}
@@ -373,6 +374,44 @@ Se apoyó en los brazos de Damiana Cisneros e hizo el intento de caminar. Despu�
                           </div>
                         </div>
                       )}
+                        {premiumTab === 'realismo' && (
+                        <div>
+                          <h2 className="text-3xl font-serif text-amber-500 mb-6">El Realismo Mágico</h2>
+                          <div className="bg-stone-800/50 p-6 rounded-lg border border-stone-700 space-y-4">
+                            <p className="text-stone-300 leading-relaxed">
+                              Movimiento literario hispanoamericano que alcanzó su apogeo a mediados del siglo XX (el "Boom latinoamericano"). Su característica fundamental es la <strong className="text-amber-100">inclusión de elementos fantásticos, míticos o sobrenaturales en la narrativa como si fueran algo cotidiano y normal</strong>.
+                            </p>
+                            
+                            <h4 className="text-xl text-amber-400 font-bold mt-6 mb-3 border-b border-stone-700 pb-2">Características Principales:</h4>
+                            
+                            <ul className="space-y-4 text-stone-400">
+                              <li className="bg-stone-900 p-3 rounded border-l-2 border-purple-500">
+                                <strong className="text-white block mb-1">👻 Lo sobrenatural como cotidiano:</strong> 
+                                Los personajes no se sorprenden ante fantasmas, milagros o hechos ilógicos. (Ej: en Comala, hablar con los muertos es la rutina diaria).
+                              </li>
+                              <li className="bg-stone-900 p-3 rounded border-l-2 border-blue-500">
+                                <strong className="text-white block mb-1">⏳ Tiempo no lineal:</strong> 
+                                El tiempo se rompe, retrocede, es cíclico o se estanca en un presente eterno.
+                              </li>
+                              <li className="bg-stone-900 p-3 rounded border-l-2 border-green-500">
+                                <strong className="text-white block mb-1">⚖️ Crítica social:</strong> 
+                                Detrás de la "magia" se esconde una dura denuncia de la realidad política (pobreza, dictaduras, caciquismo).
+                              </li>
+                              <li className="bg-stone-900 p-3 rounded border-l-2 border-orange-500">
+                                <strong className="text-white block mb-1">🌿 Hibridación cultural:</strong> 
+                                Mezcla el mundo racional moderno con las creencias, mitos populares y supersticiones rurales e indígenas.
+                              </li>
+                            </ul>
+                            
+                            <div className="mt-6 pt-4 border-t border-stone-700">
+                              <p className="text-sm text-stone-500 italic">
+                                *Otros autores clave: Gabriel García Márquez ("Cien años de soledad"), Alejo Carpentier ("El reino de este mundo"), Isabel Allende ("La casa de los espíritus").
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
                     </div>
                   </div>
                 </div>
