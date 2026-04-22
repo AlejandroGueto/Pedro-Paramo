@@ -252,6 +252,7 @@ Se apoyó en los brazos de Damiana Cisneros e hizo el intento de caminar. Despu�
                       <button onClick={() => setPremiumTab('selectividad')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'selectividad' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🎓 Características de la obra</button>
                       <button onClick={() => setPremiumTab('historia')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'historia' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>⚔️ Contexto Histórico</button>
                       <button onClick={() => setPremiumTab('realismo')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'realismo' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🔮 Realismo Mágico</button>
+                      <button onClick={() => setPremiumTab('autor')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'autor' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>✒️ Juan Rulfo</button>
                     </div>
 
                     {/* Content Area */}
@@ -411,6 +412,38 @@ Se apoyó en los brazos de Damiana Cisneros e hizo el intento de caminar. Despu�
                           </div>
                         </div>
                       )}
+                        {premiumTab === 'autor' && (
+                        <div>
+                          <h2 className="text-3xl font-serif text-amber-500 mb-6">El Creador del Páramo</h2>
+                          
+                          <div className="space-y-6">
+                            <div className="bg-stone-800 p-5 rounded-lg border border-stone-700">
+                              <h3 className="text-xl text-amber-400 font-bold mb-3">Juan Rulfo (1917 - 1986)</h3>
+                              <p className="text-stone-300 mb-3 leading-relaxed">
+                                Nació en Jalisco, México. Su infancia estuvo trágicamente marcada por la violencia de la Guerra Cristera, en la que asesinaron a su padre y a varios familiares. Esta experiencia de muerte, orfandad y desolación rural impregnaría toda su obra.
+                              </p>
+                              <p className="text-stone-300 leading-relaxed">
+                                Pese a ser considerado uno de los grandes maestros de la literatura hispanoamericana universal, su prestigio literario se asienta en apenas dos libros fundamentales. Era conocido por su personalidad introvertida, silenciosa y su extrema autoexigencia al escribir.
+                              </p>
+                            </div>
+
+                            <div className="bg-stone-800 p-5 rounded-lg border border-stone-700">
+                              <h3 className="text-xl text-orange-400 font-bold mb-3 flex items-center gap-2">
+                                <span>📖</span> El Llano en llamas (1953)
+                              </h3>
+                              <p className="text-sm text-stone-300 mb-3">
+                                Es una colección de 17 cuentos que Rulfo publicó dos años antes que <em>Pedro Páramo</em>. Es la antesala y el complemento perfecto para entender el universo de Comala.
+                              </p>
+                              <div className="bg-stone-900 p-4 rounded text-sm text-stone-400 border-l-2 border-orange-500 space-y-3">
+                                <p><strong className="text-white">El paisaje hostil:</strong> Retrata el campo mexicano como un lugar seco, implacable y estéril, que determina la miseria física y moral de quienes lo habitan.</p>
+                                <p><strong className="text-white">Los personajes:</strong> Campesinos marginados, revolucionarios desilusionados y bandoleros que actúan movidos por el instinto, la venganza o un ciego fatalismo.</p>
+                                <p><strong className="text-white">El lenguaje:</strong> Rulfo capta a la perfección el habla popular y campesina, elevándola para darle un tono poético, áspero y profundamente auténtico.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
 
                     </div>
                   </div>
