@@ -1,2 +1,2 @@
 # Pedro-Paramo
-Escape room para trabajar 5 fragmentos literarios escogidos de la obra "Pedro Páramo", de Juan Rulfo.
+Escape room para trabajar varios fragmentos literarios escogidos de la obra "Pedro Páramo", de Juan Rulfo.
