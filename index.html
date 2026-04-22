@@ -244,10 +244,10 @@ Se apoyó en los brazos de Damiana Cisneros e hizo el intento de caminar. Despu�
                   <div className="flex flex-col md:flex-row h-full">
                     {/* Tabs Sidebar */}
                     <div className="bg-stone-950 w-full md:w-64 border-r border-stone-800 p-4 flex flex-row md:flex-col overflow-x-auto">
-                      <h3 className="hidden md:block text-amber-500 font-serif text-xl mb-6 text-center border-b border-stone-800 pb-4">Códice Premium</h3>
+                      <h3 className="hidden md:block text-amber-500 font-serif text-xl mb-6 text-center border-b border-stone-800 pb-4">Códice</h3>
                       <button onClick={() => setPremiumTab('arbol')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'arbol' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🌿 Árbol Genealógico</button>
                       <button onClick={() => setPremiumTab('simbolos')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'simbolos' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🗝️ Simbología Rulfiana</button>
-                      <button onClick={() => setPremiumTab('selectividad')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'selectividad' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🎓 Guía EBAU</button>
+                      <button onClick={() => setPremiumTab('selectividad')} className={`px-4 py-3 text-left w-full rounded mb-2 transition whitespace-nowrap ${premiumTab === 'selectividad' ? 'bg-amber-800 text-white' : 'text-stone-400 hover:bg-stone-800'}`}>🎓 Características de la obra</button>
                     </div>
 
                     {/* Content Area */}
@@ -374,6 +374,11 @@ Se apoyó en los brazos de Damiana Cisneros e hizo el intento de caminar. Despu�
                       Adentrarse en el Páramo
                     </button>
                   </div>
+
+                    <p className="text-center text-stone-500 mt-10 text-sm font-serif italic">
+  Un escape room de Alejandro Güeto
+</p>
+                    
                 </div>
               </div>
             );
